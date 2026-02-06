@@ -70,4 +70,9 @@ display(files)
 
 # COMMAND ----------
 
+print("End of the Notebook")
 
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## End of Notebook
