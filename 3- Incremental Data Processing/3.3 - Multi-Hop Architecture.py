@@ -61,18 +61,12 @@ display(orders_tmp_df, checkpointLocation = f"{checkpoints_bookstore}/tmp/orders
 
 # COMMAND ----------
 
-def process_bronze():
-      query = (spark.table("orders_tmp")
-                    .writeStream
-                    .format("delta")
-                    .option("checkpointLocation", f"{checkpoints_bookstore}/orders_bronze")
-                    .outputMode("append")
-                    .trigger(availableNow=True) # we use trigger AvailableNow as Trigger type ProcessingTime is not supported for Serverless compute.
-                    .table("orders_bronze"))
-      
-      query.awaitTermination()
-
-process_bronze()
+(spark.table("orders_tmp")
+      .writeStream
+      .format("delta")
+      .option("checkpointLocation", f"{checkpoints_bookstore}/orders_bronze")
+      .outputMode("append")
+      .toTable("orders_bronze"))
 
 # COMMAND ----------
 
@@ -127,18 +121,12 @@ process_bronze() # Rerun the Bronze layer process to ingest the new data
 
 # COMMAND ----------
 
-def process_silver():
-      query = (spark.table("orders_enriched_tmp")
-                    .writeStream
-                    .format("delta")
-                    .option("checkpointLocation", f"{checkpoints_bookstore}/orders_silver")
-                    .outputMode("append")
-                    .trigger(availableNow=True) # we use trigger AvailableNow as Trigger type ProcessingTime is not supported for Serverless compute.
-                    .table("orders_silver"))
-      
-      query.awaitTermination()
-
-process_silver()
+(spark.table("orders_enriched_tmp")
+      .writeStream
+      .format("delta")
+      .option("checkpointLocation",  f"{checkpoints_bookstore}/orders_silver")
+      .outputMode("append")
+      .toTable("orders_silver"))
 
 # COMMAND ----------
 
@@ -179,18 +167,13 @@ process_silver()
 
 # COMMAND ----------
 
-def process_gold():
-      query = (spark.table("daily_customer_books_tmp")
-                    .writeStream
-                    .format("delta")
-                    .outputMode("complete")
-                    .option("checkpointLocation", f"{checkpoints_bookstore}/daily_customer_books")
-                    .trigger(availableNow=True)
-                    .table("daily_customer_books"))
-      
-      query.awaitTermination()
-
-process_gold()
+(spark.table("daily_customer_books_tmp")
+      .writeStream
+      .format("delta")
+      .outputMode("complete")
+      .option("checkpointLocation", f"{checkpoints_bookstore}/daily_customer_books")
+      .trigger(availableNow=True)
+      .toTable("daily_customer_books"))
 
 # COMMAND ----------
 

@@ -79,18 +79,13 @@ sorted_books_df = books_streaming_df.orderBy("author")
 
 # COMMAND ----------
 
-# Trigger type ProcessingTime is not supported for Serverless compute.
-# (See: https://docs.databricks.com/aws/en/compute/serverless/limitations#streaming-limitations)
-# Recommended Solution: Use Delta Live Tables (DLT) pipelines (Lecture 31) with Continuous mode.
-# Alternative Workaround: use trigger AvailableNow
-
-#(spark.table("author_counts_tmp_vw")                               
-#      .writeStream  
-#      .trigger(processingTime='4 seconds')
-#      .outputMode("complete")
-#      .option("checkpointLocation", f"{checkpoints_bookstore}/author_counts")
-#      .table("author_counts")
-#)
+(spark.table("author_counts_tmp_vw")                               
+      .writeStream  
+      .trigger(processingTime='4 seconds')
+      .outputMode("complete")
+      .option("checkpointLocation", f"{checkpoints_bookstore}/author_counts")
+      .toTable("author_counts")
+)
 
 # COMMAND ----------
 
@@ -131,7 +126,7 @@ sorted_books_df = books_streaming_df.orderBy("author")
       .trigger(availableNow=True)
       .outputMode("complete")
       .option("checkpointLocation", f"{checkpoints_bookstore}/author_counts")
-      .table("author_counts")
+      .toTable("author_counts")
       .awaitTermination()
 )
 
