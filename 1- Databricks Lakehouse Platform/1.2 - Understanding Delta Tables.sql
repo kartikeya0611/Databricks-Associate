@@ -4,9 +4,12 @@
 
 -- COMMAND ----------
 
--- NOTE: If the hive_metastore catalog is not supported in your workspace, do not run this command. Instead, your tables will be created in the default unity catalog that matches your workspace name (e.g., "demo" catalog)
+-- MAGIC %md
+-- MAGIC **Note:** If your workspace does not support the `hive_metastore` catalog, switch to the **unity-catalog** branch in this Git Folder.
 
---USE CATALOG hive_metastore
+-- COMMAND ----------
+
+USE CATALOG hive_metastore
 
 -- COMMAND ----------
 
