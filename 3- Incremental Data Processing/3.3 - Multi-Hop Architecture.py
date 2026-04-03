@@ -13,7 +13,7 @@
 
 # MAGIC %md
 # MAGIC
-# MAGIC ## Exploring The Source dDirectory
+# MAGIC ## Exploring The Source Directory
 
 # COMMAND ----------
 
@@ -76,6 +76,8 @@ display(orders_tmp_df, checkpointLocation = f"{checkpoints_bookstore}/tmp/orders
 # COMMAND ----------
 
 load_new_data()
+
+process_bronze() # Rerun the Bronze layer process to ingest the new data
 
 # COMMAND ----------
 
@@ -140,6 +142,9 @@ load_new_data()
 
 load_new_data()
 
+process_bronze()
+process_silver()
+
 # COMMAND ----------
 
 # MAGIC %md
@@ -178,6 +183,10 @@ load_new_data()
 # COMMAND ----------
 
 load_new_data()
+
+process_bronze()
+process_silver()
+process_gold()
 
 # COMMAND ----------
 

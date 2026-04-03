@@ -69,22 +69,24 @@ SHOW TABLES;
 
 -- COMMAND ----------
 
-CREATE GLOBAL TEMP VIEW global_temp_view_latest_phones
-AS SELECT * FROM smartphones
-    WHERE year > 2020
-    ORDER BY year DESC;
+-- Note: GLOBAL TEMPORARY VIEW is not supported on serverless compute.
+
+--CREATE GLOBAL TEMP VIEW global_temp_view_latest_phones
+--AS SELECT * FROM smartphones
+--    WHERE year > 2020
+--    ORDER BY year DESC;
 
 -- COMMAND ----------
 
-SELECT * FROM global_temp.global_temp_view_latest_phones;
+--SELECT * FROM global_temp.global_temp_view_latest_phones;
 
 -- COMMAND ----------
 
-SHOW TABLES;
+--SHOW TABLES;
 
 -- COMMAND ----------
 
-SHOW TABLES IN global_temp;
+--SHOW TABLES IN global_temp;
 
 -- COMMAND ----------
 

@@ -90,8 +90,8 @@ sorted_books_df = books_streaming_df.orderBy("author")
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC SELECT *
-# MAGIC FROM author_counts
+# MAGIC --SELECT *
+# MAGIC --FROM author_counts
 
 # COMMAND ----------
 
@@ -101,7 +101,7 @@ sorted_books_df = books_streaming_df.orderBy("author")
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC INSERT INTO books
+# MAGIC INSERT INTO books (book_id, title, author, category, price)
 # MAGIC values ("B19", "Introduction to Modeling and Simulation", "Mark W. Spong", "Computer Science", 25),
 # MAGIC         ("B20", "Robot Modeling and Control", "Mark W. Spong", "Computer Science", 30),
 # MAGIC         ("B21", "Turing's Vision: The Birth of Computer Science", "Chris Bernhardt", "Computer Science", 35)
@@ -114,7 +114,7 @@ sorted_books_df = books_streaming_df.orderBy("author")
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC INSERT INTO books
+# MAGIC INSERT INTO books (book_id, title, author, category, price)
 # MAGIC values ("B16", "Hands-On Deep Learning Algorithms with Python", "Sudharsan Ravichandiran", "Computer Science", 25),
 # MAGIC         ("B17", "Neural Network Methods in Natural Language Processing", "Yoav Goldberg", "Computer Science", 30),
 # MAGIC         ("B18", "Understanding digital signal processing", "Richard Lyons", "Computer Science", 35)

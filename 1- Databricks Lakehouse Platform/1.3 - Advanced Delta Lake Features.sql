@@ -48,6 +48,7 @@ DESCRIBE DETAIL employees
 
 -- COMMAND ----------
 
+-- Note: The following command has no effect in this case, as an optimization operation was automatically executed on the table in version 6.
 OPTIMIZE employees
 ZORDER BY id
 
@@ -83,7 +84,11 @@ VACUUM employees RETAIN 0 HOURS
 
 -- COMMAND ----------
 
-SET spark.databricks.delta.retentionDurationCheck.enabled = false;
+-- Note: The retentionDurationCheck configuration is not available on Serverless compute
+-- SET spark.databricks.delta.retentionDurationCheck.enabled = false;
+
+-- Instead, use table properties
+ALTER TABLE employees SET TBLPROPERTIES ('delta.deletedFileRetentionDuration'='interval 0 hours')
 
 -- COMMAND ----------
 
@@ -93,6 +98,7 @@ VACUUM employees RETAIN 0 HOURS
 
 -- -- Note: You may still see results due to a cached version of the table in the cluster. Restart your cluster to verify the result.
 
+-- Note: You may still see results due to a cached version of the table in the serverless compute environment
 SELECT * FROM employees@v1
 
 -- COMMAND ----------
