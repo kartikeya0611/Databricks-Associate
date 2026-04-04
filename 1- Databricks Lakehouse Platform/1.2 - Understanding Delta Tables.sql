@@ -75,7 +75,7 @@ DESCRIBE DETAIL employees
 -- COMMAND ----------
 
 -- MAGIC %md
--- MAGIC ## Updating Table
+-- MAGIC ## Inserting More Data
 
 -- COMMAND ----------
 
@@ -94,10 +94,6 @@ SELECT * FROM employees
 -- COMMAND ----------
 
 DESCRIBE DETAIL employees
-
--- COMMAND ----------
-
-SELECT * FROM employees
 
 -- COMMAND ----------
 

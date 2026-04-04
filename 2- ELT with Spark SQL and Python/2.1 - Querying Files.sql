@@ -45,8 +45,7 @@ SELECT count(*) FROM json.`${dataset_bookstore}/customers-json`
 -- COMMAND ----------
 
  SELECT *,
-    -- input_file_name() source_file
-    _metadata.file_path  source_file
+    _metadata.file_path source_file
   FROM json.`${dataset_bookstore}/customers-json`;
 
 -- COMMAND ----------
@@ -181,25 +180,9 @@ SELECT * FROM read_files(
     format => 'csv',
     header => 'true',
     delimiter => ';');
-
---CREATE TEMP VIEW books_tmp_vw
---   (book_id STRING, title STRING, author STRING, category STRING, price DOUBLE)
---USING CSV
---OPTIONS (
---  path = "${dataset_bookstore}/books-csv/export_*.csv",
---  header = "true",
---  delimiter = ";"
---);
-
---CREATE TABLE books AS
---  SELECT * FROM books_tmp_vw;
   
 SELECT * FROM books
 
 -- COMMAND ----------
 
 DESCRIBE EXTENDED books
-
--- COMMAND ----------
-
-
