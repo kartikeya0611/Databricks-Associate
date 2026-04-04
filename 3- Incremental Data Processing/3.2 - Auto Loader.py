@@ -34,9 +34,8 @@ display(files)
         .option("cloudFiles.schemaLocation", f"{checkpoints_bookstore}/orders")
         .load(f"{dataset_bookstore}/orders-raw")
       .writeStream
-        .trigger(availableNow=True) # we use trigger AvailableNow as Trigger type ProcessingTime is not supported for Serverless compute.
         .option("checkpointLocation", f"{checkpoints_bookstore}/orders")
-        .table("orders_updates")
+        .toTable("orders_updates")
 )
 
 # COMMAND ----------
@@ -85,6 +84,11 @@ display(files)
 # MAGIC %md
 # MAGIC
 # MAGIC ## Cleaning Up
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC First, stop the above stream
 
 # COMMAND ----------
 

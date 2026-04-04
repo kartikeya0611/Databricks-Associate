@@ -43,12 +43,6 @@ if hive_exists:
     spark.sql(f"USE CATALOG {data_catalog}")
     spark.sql(f"CREATE SCHEMA IF NOT EXISTS {db_name}")
     spark.sql(f"USE SCHEMA {db_name}")
-
-    try:
-        spark.conf.set("fs.s3a.endpoint", "s3.eu-west-3.amazonaws.com")
-        spark.conf.set("fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider")
-    except:
-        pass
 else:
     data_catalog = spark.sql("SELECT current_catalog()").collect()[0][0]
     dataset_volume_name = "bookstore_dataset"
@@ -62,6 +56,13 @@ else:
 
     spark.sql(f"CREATE VOLUME IF NOT EXISTS {dataset_volume_name}")
     spark.sql(f"CREATE VOLUME IF NOT EXISTS {checkpoints_volume_name}")
+
+try:
+    spark.conf.set(f"dataset.bookstore", dataset_bookstore)
+    spark.conf.set("fs.s3a.endpoint", "s3.eu-west-3.amazonaws.com")
+    spark.conf.set("fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider")
+except:
+    pass
 
 print(f"Data Catalog: {data_catalog}")
 

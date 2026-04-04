@@ -4,8 +4,6 @@
 
 -- COMMAND ----------
 
-USE CATALOG dev_catalog;
-
 CREATE TABLE IF NOT EXISTS smartphones
 (id INT, name STRING, brand STRING, year INT);
 

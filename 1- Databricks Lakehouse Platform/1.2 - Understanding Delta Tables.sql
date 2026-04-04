@@ -69,6 +69,7 @@ DESCRIBE DETAIL employees
 
 -- COMMAND ----------
 
+-- The underlying table directory is protected in Unity Catalog; therefore, this command cannot be executed. You will learn how to access the table directory by creating external tables in Notebook 1.4.
 --%fs ls '/path/to/employees'
 
 -- COMMAND ----------
@@ -78,16 +79,13 @@ DESCRIBE DETAIL employees
 
 -- COMMAND ----------
 
-INSERT INTO employees
-VALUES
-  (4, "Thomas", 4000.3),
-  (5, "Anna", 2500.0);
+UPDATE employees 
+SET salary = salary + 100
+WHERE name = "Adam";
 
--- COMMAND ----------
-
-INSERT INTO employees
-VALUES
-  (6, "Kim", 6200.3)
+UPDATE employees 
+SET salary = salary + 100
+WHERE name = "Anna";
 
 -- COMMAND ----------
 
@@ -105,3 +103,9 @@ DESCRIBE DETAIL employees
 -- COMMAND ----------
 
 DESCRIBE HISTORY employees
+
+-- COMMAND ----------
+
+-- The underlying table directory is protected in Unity Catalog; therefore, this command cannot be executed. You will learn how to access the table directory by creating external tables in Notebook 1.4.
+
+--%fs head '/path/to/employees/_delta_log/00000000000000000005.json'

@@ -5,10 +5,6 @@
 
 -- COMMAND ----------
 
-USE CATALOG demo_catalog
-
--- COMMAND ----------
-
 DESCRIBE HISTORY employees
 
 -- COMMAND ----------
@@ -30,11 +26,7 @@ SELECT * FROM employees
 
 -- COMMAND ----------
 
-DESCRIBE HISTORY employees
-
--- COMMAND ----------
-
-RESTORE TABLE employees TO VERSION AS OF 3
+RESTORE TABLE employees TO VERSION AS OF 6
 
 -- COMMAND ----------
 
@@ -91,6 +83,8 @@ VACUUM employees RETAIN 0 HOURS
 
 -- COMMAND ----------
 
+-- -- Note: You may still see results due to a cached version of the table in the cluster. Restart your cluster to verify the result.
+
 -- Note: You may still see results due to a cached version of the table in the serverless compute environment
 SELECT * FROM employees@v1
 
@@ -107,7 +101,3 @@ DROP TABLE employees
 -- COMMAND ----------
 
 SELECT * FROM employees
-
--- COMMAND ----------
-
---UNDROP TABLE employees
